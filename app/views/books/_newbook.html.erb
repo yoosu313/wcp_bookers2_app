@@ -1,9 +1,9 @@
-<!--@book → book-->
+<!--@book_new → book_new-->
 <h2>New Book</h2>
-<%= form_with model: book, local: true do |f| %>
-  <% if book.errors.any? %>
-    <%= book.errors.count %> error
-    <% book.errors.full_messages.each do |msg| %>
+<%= form_with model: book_new, local: true do |f| %>
+  <% if book_new.errors.any? %>
+    <%= book_new.errors.count %> error
+    <% book_new.errors.full_messages.each do |msg| %>
       <ul><li><%= msg %></li></ul>
     <% end %>
   <% end %>
