@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :correct_post,only: [:edit,:destroy]
+
   def index
     @books = Book.all
     @book_new = Book.new
@@ -8,6 +10,7 @@ class BooksController < ApplicationController
   def create
     @book_new = Book.new(book_params)
     @book_new.user_id = current_user.id
+    @user = current_user
     if @book_new.save
       flash[:notice] = "Book was successfully created."
       redirect_to @book_new
@@ -45,6 +48,13 @@ class BooksController < ApplicationController
     book.destroy
     flash[:notice] = "投稿を削除しました"
     redirect_to books_path
+  end
+
+  def correct_post
+      @book = Book.find(params[:id])
+    unless @book.user.id == current_user.id
+      redirect_to books_path
+    end
   end
 
   private

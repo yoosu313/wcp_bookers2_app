@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :correct_user,only: [:edit]
+
   def index
     @users = User.all
     @user = current_user
@@ -18,9 +20,21 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(@user.id)
+    if @user.update(user_params)
+      flash[:notice] = "Profile data was successfully updated."
+      redirect_to user_path(@user.id)
+    else
+      flash[:notice] = "error"
+      render :edit
+    end
   end
+
+  def correct_user
+        @user = User.find(params[:id])
+    unless @user.id == current_user.id
+      redirect_to user_path
+    end
+end
 
   private
 
