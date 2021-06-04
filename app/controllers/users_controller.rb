@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     unless @user.id == current_user.id
       redirect_to user_path
     end
-end
+  end
 
   private
 
