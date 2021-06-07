@@ -27,12 +27,12 @@
               <% if user_signed_in? %>
               <!--コード減らす為にlink_toから<a>への変換したい-->
               <li>
-                <%= link_to user_path(current_user.id) do %>
+                <%= link_to  user_path(current_user.id)do %>
                   <div class="fas fa-home nav-link text-light">Home</div>
                 <% end %>
               </li>
               <li>
-                <%= link_to users_path(current_user.id) do %>
+                <%= link_to users_path do %>
                   <div class="fas fa-users nav-link text-light">Users</div>
                 <% end %>
               </li>
@@ -50,10 +50,10 @@
                 <a class="fas fa-link nav-link text-light" href="/home/about">About</a>
               </li>
               <li>
-                <a class="fas fa-user-plus nav-link text-light" href="/users/sign_up">sigh up</a>
+                <a class="fas fa-user-plus nav-link text-light" href="/users/sign_up">sign up</a>
               </li>
               <li>
-                <a class="fas fa-sign-in-alt nav-link text-light" href="users/sign_in">login</a>
+                <a class="fas fa-sign-in-alt nav-link text-light" href="/users/sign_in">login</a>
               </li>
             <% end %>
             </ul>
