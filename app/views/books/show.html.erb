@@ -1,39 +1,50 @@
-<h1>Book detail</h1>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <!--左側-->
+    <div class="col-md-3">
+      <!--User info-->
+      <%= render 'users/info', user: @user %>
+      <!--New book-->
+      <%= render 'books/newbook', book_new: @book_new %>
+    </div>
+    <!--右側-->
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+       <% if @user.id == current_user.id %>
+        <tbody>
+            <tr>
+              <td>
+                <%= link_to user_path(@user.id) do %>
+                  <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, format:'jpg', fallback:"no_image.jpg", size:"40x40" %>
+                  <%= @user.name %>
+                <% end %>
+              </td>
+              <td><%= link_to @book.title, @book %></td>
+              <td><%= @book.body %></td>
+              <td><%= link_to "Edit", edit_book_path(@book.id), class: 'btn btn-sm btn-success' %></td>
+              <td><%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "Do you really want to delete this post", class: 'btn btn-sm btn-danger' %></td>
+            </tr>
+       <% else %>
+            <tr>
+              <td>
+                <%= link_to user_path(@user.id) do %>
+                  <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, format:'jpg', fallback:"no_image.jpg", size:"40x40" %>
+                  <%= @user.name %>
+                <% end %>
+              </td>
+              <td><%= link_to @book.title, @book %></td>
+              <td><%= @book.body %></td>
+            </tr>
+        </tbody>
+       <% end %>
+      </table>
+    </div>
+  </div>
+</div>
 
-<table>
-  <% if @user.id == current_user.id %>
-  <tbody>
-      <tr>
-        <td>
-          <%= link_to user_path(@user.id) do %>
-            <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, format:'jpg', fallback:"no_image.jpg", size:"40x40" %>
-            <%= @user.name %>
-          <% end %>
-        </td>
-        <td><%= link_to @book.title, @book %></td>
-        <td><%= @book.body %></td>
-        <td><%= link_to "Edit", edit_book_path(@book.id) %></td>
-        <td><%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "Do you really want to delete this post" %></td>
-      </tr>
-  <% else %>
-      <tr>
-        <td>
-          <%= link_to user_path(@user.id) do %>
-            <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, format:'jpg', fallback:"no_image.jpg", size:"40x40" %>
-            <%= @user.name %>
-          <% end %>
-        </td>
-        <td><%= link_to @book.title, @book %></td>
-        <td><%= @book.body %></td>
-      </tr>
-  </tbody>
-  <% end %>
-</table>
-
-<!--左側-->
-<!--User info-->
-<%= render 'users/info', user: @user %>
 
 
-<!--New book-->
-<%= render 'books/newbook', book_new: @book_new %>
+
+
+
